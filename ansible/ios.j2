@@ -1,0 +1,8 @@
+hostname {{ item.value.hostname }}
+
+feature ospf
+feature bgp
+
+{% if item.value.netflow_enable %}
+feature netflow
+{% endif %}

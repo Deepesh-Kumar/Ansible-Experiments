@@ -1,0 +1,36 @@
+---
+- name: Save config
+  hosts: cisco
+  gather_facts: false
+  connection: local
+  #ansible_network_os: ios
+#  vars:
+#    ansible_network_os: ios 
+#    cli:
+#      host: "{{ csr_host }}"
+#       username: "{{ username }}"
+#       password: "{{ password }} "
+#       transport: cli
+
+  tasks:
+    - name: Facts Check
+      ios_facts:
+      when: ansible_network_os == 'ios' 
+    - ios_command:
+        #provider: "{{ cli }}"
+        commands: show run | i hostname
+        #provider: "{{ cli }}"
+      register: output 
+
+    - name: Display
+      when: '"hostname CSR-2" in output'
+      debug:
+        msg: "The host name is {{ansible_net_hostname }}"
+     
+    - name: facts display
+      debug:
+        var:  hostvars['csr-1']
+
+
+#    - name: copy output to a file
+#      copy: content="{{ output }}" dest=/home/tester/tvip.text

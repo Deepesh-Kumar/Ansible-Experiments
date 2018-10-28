@@ -1,0 +1,9 @@
+ansible_host: 10.195.169.133
+ansible_user: admin
+ansible_ssh_pass: admin
+ansible_connection: network_cli
+ansible_network_os: ios
+ansbile_become: yes
+#ansible_become_method: enable
+#ansible_become_pass: admin
+

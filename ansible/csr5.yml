@@ -1,0 +1,22 @@
+---
+- name: Run cisco commands
+  hosts: "cisco_by_name"
+  connection: local
+  gather_facts: false
+  vars:
+    cli:
+       host: "{{ ansible_host }}"
+       username: "{{ username }}"
+       password: "{{ password }}"
+       transport: cli
+  tasks:
+
+    - name: get base information
+      ios_command:
+        provider: "{{ cli }}"
+        commands:
+          - show version | include IOS
+          - show ip interface brief
+      register: output
+
+    - debug: var=output.stdout_lines

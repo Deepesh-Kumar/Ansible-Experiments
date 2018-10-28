@@ -1,0 +1,21 @@
+---
+   - name: Configure SNMP Contact
+   hosts: "csr"
+   gather_facts: false
+   connection: local
+   vars:
+   cli:
+   host: "{{ inventory_hostname }}"
+   username: admin
+   password: admin
+   transport: cli
+   tasks:
+   - name: configure snmp contact
+   nxos_snmp_contact:
+   contact: TEST_1
+   state: present
+   provider: "{{ cli }}"
+   register: output
+   - name: show output
+   debug:
+   var: output

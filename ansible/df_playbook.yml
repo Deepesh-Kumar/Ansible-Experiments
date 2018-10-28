@@ -1,0 +1,25 @@
+---
+- hosts: 10.195.169.55
+#  user:tester
+  tasks:
+#    - name: check file content
+#      command: cat a.txt
+#      register: out
+#    - debug: 
+#        var: out.stdout_lines   
+    - name: check release 
+      command: lsb_release -a 
+      register: out
+    - debug:
+        var: out.stdout_lines 
+#    - name: Install nginx
+#      apt: 
+#         name: bind9
+         #state: latest
+         #default_release: squeeze-backports
+         #update_cache: yes
+      #state: present
+      #when: '"Ubuntu 16.04.3 LTS" in  out.stdout_lines '  
+#    - name: check file content 
+#    - debug:
+#        var: out.stdout_lines
